@@ -6,7 +6,8 @@
 El objetivo de este repositorio es consolidar la información de
 [Vacantes en centros privados concertados del Gobierno de
 Canarias](https://www.gobiernodecanarias.org/educacion/web/centros/gestion_centros/centros_privados_concertados/vacantes/)
-en una tabla de fácil acceso.
+en una tabla de fácil acceso. [Puedes ver la tabla haciendo click
+aquí](https://github.com/gorkang/vacantes_concertados/blob/master/outputs/DF_ALL.csv)
 
 ------------------------------------------------------------------------
 
