@@ -1,4 +1,6 @@
-
+---
+output: md_document
+---
 # vacantes_concertados
 
 <!-- badges: start -->
