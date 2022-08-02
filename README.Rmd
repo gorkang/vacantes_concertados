@@ -10,8 +10,9 @@ El objetivo de este repositorio es consolidar la información de [Vacantes en ce
 
 ---  
 
+Para empezar, puedes abrir el archivo `run.R` y correr las últimas dos líneas.  
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 DF_ALL = readr::read_csv("outputs/DF_ALL.csv") # Leemos archivo
 DT::datatable(DF_ALL) # Vemos tabla

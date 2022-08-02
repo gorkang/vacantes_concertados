@@ -10,4 +10,10 @@ en una tabla de fácil acceso.
 
 ------------------------------------------------------------------------
 
+Para empezar, puedes abrir el archivo `run.R` y correr las últimas dos
+líneas.
+
+    DF_ALL = readr::read_csv("outputs/DF_ALL.csv") # Leemos archivo
+    DT::datatable(DF_ALL) # Vemos tabla
+
 ![](README_files/figure-markdown_strict/unnamed-chunk-1-1.png)
