@@ -1,0 +1,21 @@
+
+# vacantes_concertados
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+El objetivo de este repositorio es consolidar la información de [Vacantes en centros privados concertados del Gobierno de Canarias](https://www.gobiernodecanarias.org/educacion/web/centros/gestion_centros/centros_privados_concertados/vacantes/) en una tabla de fácil acceso.
+
+---  
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+DF_ALL = readr::read_csv("outputs/DF_ALL.csv") # Leemos archivo
+DT::datatable(DF_ALL) # Vemos tabla
+
+```
+
+
+
+
