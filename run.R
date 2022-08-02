@@ -13,5 +13,5 @@ create_table(folder_PDFs = "data/")
 
 
 # 3) Ver Tabla (usando el paquete DT)
-DF_ALL = read_csv("outputs/DF_ALL.csv") # Leemos archivo
+DF_ALL = readr::read_csv("outputs/DF_ALL.csv") # Leemos archivo
 DT::datatable(DF_ALL) # Vemos tabla

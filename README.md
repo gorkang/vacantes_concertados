@@ -18,3 +18,19 @@ líneas.
     DT::datatable(DF_ALL) # Vemos tabla
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-1-1.png)
+
+------------------------------------------------------------------------
+
+## Gráficas
+
+Con estos datos se pueden visualizar algunas cosas interesantes:
+
+**Número de vacantes en función del tipo de jornada**
+
+![](outputs/plots/jornada.png)
+
+------------------------------------------------------------------------
+
+**Número de vacantes ofertadas por centro educativo**
+
+![](outputs/plots/vacantes.png)

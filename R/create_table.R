@@ -6,9 +6,10 @@ create_table <- function(folder_PDFs = "data/") {
   if (!require('rvest')) install.packages('rvest'); library('rvest')
   if (!require('cli')) install.packages('cli'); library('cli')
   if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
+  library(tabulizer)
   
   FILES = list.files(folder_PDFs, full.names = TRUE)
-  
+  # FILES = "/home/emrys/gorkang@gmail.com/RESEARCH/PROYECTOS-Code/vacantes_concertados/data/180722_vacantes_cc_2.pdf"
   DF_ALL = 
     1:length(FILES) %>%
     map_df(~{
@@ -18,21 +19,23 @@ create_table <- function(folder_PDFs = "data/") {
       out1 <- extract_tables(FILES[.x], method = "decide")
       
       NAME = gsub(".*\\n[0-9]{8} (.*?)\\n.*", "\\1", TEXT)
+      FECHA = gsub(".*Fecha de publicación: (.*?)\\n[0-9]{8}.*", "\\1", TEXT)
       TABLE_RAW = out1[[1]] %>% as_tibble() %>% janitor::row_to_names(row_number = 1) %>% janitor::clean_names() %>% 
         mutate(colegio = NAME,
-               file = basename(FILES[.x]))
+               file = basename(FILES[.x]),
+               fecha = FECHA)
         
-      if (ncol(TABLE_RAW) == 5 & !"x" %in% names(TABLE_RAW)) {
+      if (ncol(TABLE_RAW) == 6 & !"x" %in% names(TABLE_RAW)) {
         
         DF = TABLE_RAW
         
-      } else if (ncol(TABLE_RAW) == 5 & "x" %in% names(TABLE_RAW)) {
+      } else if (ncol(TABLE_RAW) == 6 & "x" %in% names(TABLE_RAW)) {
         cli::cli_alert_warning("{.x}: {names(TABLE_RAW)}")
         DF = TABLE_RAW %>% 
           rename(especialidad = x,
                  jornada = especialidad_jornada)
         
-      } else if (ncol(TABLE_RAW) == 4) {
+      } else if (ncol(TABLE_RAW) == 5) {
         
         PARCIAL = grepl("PARCIAL", TABLE_RAW$especialidad_jornada)
         COMPLETA = grepl("COMPLETA", TABLE_RAW$especialidad_jornada)
@@ -75,9 +78,11 @@ create_table <- function(folder_PDFs = "data/") {
                case_when(
                  lead(num_vacantes) == "" & num_vacantes == "1" & jornada == "" ~ lead(jornada),
                  lead(num_vacantes) == "" & num_vacantes == "1" & jornada != "" ~ jornada,
+                 grepl("PARCIAL", especialidad, ignore.case = FALSE) & jornada == "" ~ "PARCIAL",
+                 grepl("COMPLETA", especialidad, ignore.case = FALSE) & jornada == "" ~ "COMPLETA",
                  TRUE ~ jornada
                )) %>% 
-      select(num_vacantes, especialidad, jornada, colegio, file) %>% 
+      select(num_vacantes, especialidad, jornada, colegio, file, fecha) %>% 
       filter(num_vacantes != "")
     
     })
